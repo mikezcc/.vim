@@ -60,7 +60,7 @@ Plug 'maximbaz/lightline-ale'
 call plug#end()
 
 " Key Bindings
-inoremap <M-w> <Esc>:w<CR>
+inoremap w <Esc>:w<CR>
 " NERDTree
 nnoremap <F4> :NERDTreeToggle<CR>
 " Rainbow
@@ -69,8 +69,8 @@ if !has('gui_running')
     set t_Co=256
 endif
 " FZF
-nnoremap <M-b> :Buffers<CR>
-nnoremap <M-e> :Files<CR>
+nnoremap b :Buffers<CR>
+nnoremap e :Files<CR>
 let g:fzf_layout = {'up' : '~40%'}
 " Ale
 let g:ale_linters = {
@@ -110,11 +110,11 @@ let g:lightline.active = {
 \   ]
 \}
 " Fugitive
-nnoremap <M-d> :Gdiff<CR>
+nnoremap d :Gdiff<CR>
 " Terminal
-nnoremap <M-v> :bo term<CR>
+nnoremap v :bo term<CR>
 " Tag
 nnoremap <F11> g<C-]>
-nnoremap <M-8> <C-t>
+nnoremap 8 <C-t>
 " Uncomment below to make screen not flash on error
 " set vb t_vb=""
