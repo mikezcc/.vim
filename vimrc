@@ -35,9 +35,12 @@ set autoread
 set nobackup
 set noswapfile
 set encoding=utf8
-set belloff=all
+"set belloff=all
 set scrolloff=5
 set hidden
+set winaltkeys=no
+set shortmess=a
+set cmdheight=2
 
 " Plugin Manager
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -51,16 +54,20 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
+Plug 'airblade/vim-rooter'
 
 call plug#end()
 
 " Key Bindings
-inoremap w <Esc>:w<CR>
+nnoremap <M-w> :w<CR>
+nnoremap <M-g> :
+autocmd filetype python nnoremap <F9> :exec "!python3.8 %" <CR>
+autocmd filetype cpp nnoremap <F9> :make %:r && ./'%:r' <CR>
 " NERDTree
 nnoremap <F4> :NERDTreeToggle<CR>
 " Rainbow
@@ -69,21 +76,22 @@ if !has('gui_running')
     set t_Co=256
 endif
 " FZF
-nnoremap b :Buffers<CR>
-nnoremap e :Files<CR>
+nnoremap <M-b> :Buffers<CR>
+nnoremap <M-e> :Files<CR>
+nnoremap     :BTags<CR>
+nnoremap <S-F12> :Rg<CR>
 let g:fzf_layout = {'up' : '~40%'}
 " Ale
 let g:ale_linters = {
-\   'python' : ['flake8'],
-\   'cpp'    : [],
+ \   'python' : ['flake8'],
+"\   'cpp'    : ['clang-format'],
 \}
 let g:ale_fixers = {
 \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['black']
 \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
-nnoremap ^L :ALEToggleBuffer<CR>
+nnoremap  :ALEToggleBuffer<CR>
 " Ale LightLine
 let g:lightline = {}
 
@@ -110,11 +118,14 @@ let g:lightline.active = {
 \   ]
 \}
 " Fugitive
-nnoremap d :Gdiff<CR>
+nnoremap <M-d> :Gdiff<CR>
 " Terminal
-nnoremap v :bo term<CR>
+nnoremap <M-v> :bo term<CR>
 " Tag
 nnoremap <F11> g<C-]>
-nnoremap 8 <C-t>
+nnoremap <M-8> <C-t>
+" Vim Rooter
+let g:rooter_patterns = ['.git']
+
 " Uncomment below to make screen not flash on error
-" set vb t_vb=""
+set vb t_vb=""
