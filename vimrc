@@ -41,7 +41,9 @@ set hidden
 set winaltkeys=no
 set shortmess=a
 set cmdheight=2
-set macmeta
+if has("gui_macvim")
+    set macmeta
+endif
 
 " Plugin Manager
 if empty(glob('~/.vim/autoload/plug.vim'))
