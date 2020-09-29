@@ -64,8 +64,8 @@ Plug 'airblade/vim-rooter'
 call plug#end()
 
 " Key Bindings
-nnoremap <M-w> :w<CR>
-nnoremap <M-g> :
+nnoremap w :w<CR>
+nnoremap g :
 autocmd filetype python nnoremap <F9> :exec "!python3.8 %" <CR>
 autocmd filetype cpp nnoremap <F9> :make %:r && ./'%:r' <CR>
 " NERDTree
@@ -76,8 +76,8 @@ if !has('gui_running')
     set t_Co=256
 endif
 " FZF
-nnoremap <M-b> :Buffers<CR>
-nnoremap <M-e> :Files<CR>
+nnoremap b :Buffers<CR>
+nnoremap e :Files<CR>
 nnoremap     :BTags<CR>
 nnoremap <S-F12> :Rg<CR>
 let g:fzf_layout = {'up' : '~40%'}
@@ -118,12 +118,12 @@ let g:lightline.active = {
 \   ]
 \}
 " Fugitive
-nnoremap <M-d> :Gdiff<CR>
+nnoremap d :Gdiff<CR>
 " Terminal
-nnoremap <M-v> :bo term<CR>
+nnoremap v :bo term<CR>
 " Tag
 nnoremap <F11> g<C-]>
-nnoremap <M-8> <C-t>
+nnoremap 8 <C-t>
 " Vim Rooter
 let g:rooter_patterns = ['.git']
 
