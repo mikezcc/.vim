@@ -41,8 +41,12 @@ set hidden
 set winaltkeys=no
 set shortmess=a
 set cmdheight=2
+set splitbelow
+set splitright
 if has("gui_macvim")
     set macmeta
+    autocmd filetype python nnoremap <F9> :exec "!python3.8 %" <CR>
+    autocmd filetype cpp nnoremap <F9> :exec "!clang++ -std=c++14 -o %:r % && ./'%:r' < input.txt > output.txt" <CR>
 endif
 
 " Plugin Manager
@@ -69,8 +73,6 @@ call plug#end()
 " Key Bindings
 nnoremap <M-w> :w<CR>
 nnoremap <M-g> :
-autocmd filetype python nnoremap <F9> :exec "!python3.8 %" <CR>
-autocmd filetype cpp nnoremap <F9> :make %:r && ./'%:r' <CR>
 " NERDTree
 nnoremap <F4> :NERDTreeToggle<CR>
 " Rainbow
