@@ -19,10 +19,12 @@ set number
 set ruler
 set statusline=2
 set laststatus=2
+set showtabline=2
 
 " Color Scheme
 colorscheme dejavu
 set background=dark
+hi TabLineSel cterm=None ctermfg=Red ctermbg=Yellow
 
 " Searching
 set hlsearch
@@ -67,6 +69,7 @@ Plug 'preservim/nerdtree'
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug 'airblade/vim-rooter'
+Plug 'mengelbrecht/lightline-bufferline'
 
 call plug#end()
 
@@ -100,7 +103,19 @@ nnoremap  :ALEToggleBuffer<CR>
 " Ale LightLine
 let g:lightline = {}
 
+let g:lightline.colorscheme = "molokai"
+
+let g:lightline.active = {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+      \ }
+
+let g:lightline.tabline = {
+      \   'left': [ ['buffers'] ],
+      \   'right': [ ['close'] ]
+      \ }
+
 let g:lightline.component_expand = {
+      \  'buffers': 'lightline#bufferline#buffers',
       \  'linter_checking': 'lightline#ale#checking',
       \  'linter_infos': 'lightline#ale#infos',
       \  'linter_warnings': 'lightline#ale#warnings',
@@ -108,6 +123,7 @@ let g:lightline.component_expand = {
       \  'linter_ok': 'lightline#ale#ok',
       \ }
 let g:lightline.component_type = {
+      \   'buffers': 'tabsel',
       \     'linter_checking': 'right',
       \     'linter_infos': 'right',
       \     'linter_warnings': 'warning',
@@ -122,6 +138,8 @@ let g:lightline.active = {
 \       [ 'fileformat', 'fileencoding', 'filetype' ]
 \   ]
 \}
+
+let g:lightline#bufferline#show_number=2
 " Fugitive
 nnoremap <M-d> :Gdiff<CR>
 " Terminal
